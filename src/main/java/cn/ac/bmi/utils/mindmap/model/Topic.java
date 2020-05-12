@@ -3,6 +3,7 @@ package cn.ac.bmi.utils.mindmap.model;
 import lombok.Setter;
 
 import java.util.Set;
+import java.util.function.Consumer;
 
 public class Topic {
   private String id;
@@ -23,13 +24,17 @@ public class Topic {
     this.link = link;
   }
 
-  public Topic init(Sheet sheet) {
-    this.belongTo = sheet;
+  public Topic init(Sheet belongTo, Consumer<Topic> hook) {
+    this.belongTo = belongTo;
+
+    if (hook != null) {
+      hook.accept(this);
+    }
 
     this.title = this.title == null ? "" : this.title.trim();
     if (topics != null) {
       for (Topic child: topics) {
-        child.init(sheet);
+        child.init(belongTo, hook);
       }
     }
 

@@ -7,6 +7,6 @@ import static org.testng.Assert.assertNotNull;
 public class MindmapTest {
   @Test
   public void testObjectCreation() {
-    assertNotNull(new Mindmap(new Sheet[0]));
+    assertNotNull(new Mindmap(new Sheet[0], null,null));
   }
 }
