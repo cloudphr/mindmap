@@ -1,4 +1,4 @@
-package cn.ac.bmi.utils.mindmap;
+package cn.ac.bmi.utils.mindmap.model;
 
 import lombok.Getter;
 

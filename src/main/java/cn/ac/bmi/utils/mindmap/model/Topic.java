@@ -1,8 +1,7 @@
-package cn.ac.bmi.utils.mindmap;
+package cn.ac.bmi.utils.mindmap.model;
 
 import lombok.Setter;
 
-import java.lang.reflect.Method;
 import java.util.Set;
 
 public class Topic {
