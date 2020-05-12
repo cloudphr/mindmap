@@ -4,7 +4,7 @@ import cn.ac.bmi.utils.mindmap.model.Sheet;
 
 import java.io.InputStream;
 
-public class XmindParser extends AbstractParser {
+public class XmindParser extends MindmapParser {
   @Override
   Sheet[] parse(InputStream mindmapInputStream) {
     return new Sheet[0];
