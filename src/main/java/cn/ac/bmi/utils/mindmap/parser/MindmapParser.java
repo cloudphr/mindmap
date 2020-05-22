@@ -1,15 +1,13 @@
 package cn.ac.bmi.utils.mindmap.parser;
 
 import cn.ac.bmi.utils.mindmap.model.Sheet;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
 public abstract class MindmapParser {
-  public static Logger LOG = LogManager.getLogger(MindmapParser.class);
+  // public static Logger LOG = LogManager.getLogger(MindmapParser.class);
   public Sheet[] parse(String mindmapPath) {
     InputStream mindmapInputStream = null;
     try {

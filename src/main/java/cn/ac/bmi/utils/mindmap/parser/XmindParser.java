@@ -5,9 +5,6 @@ import cn.ac.bmi.utils.mindmap.model.Topic;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -17,6 +14,9 @@ import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipInputStream;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 public class XmindParser extends MindmapParser {
   /* The attributes of Sheet Class, used to parse sheet in Xmind */
@@ -50,13 +50,14 @@ public class XmindParser extends MindmapParser {
         Sheet sheet = this.parseSheetNode(sheetNodes.item(i));
         if (sheet.getTopic() != null) {
           sheets.add(sheet);
-        } else {
-          LOG.warn("Null topic sheet found!");
+          // } else {
+          // LOG.warn("Null topic sheet found!");
         }
       }
     }
     return sheets.toArray(new Sheet[0]);
   }
+
   private InputStream extractContentFromXmind(InputStream xmindInputStream) {
     if (xmindInputStream == null) {
       return null;
