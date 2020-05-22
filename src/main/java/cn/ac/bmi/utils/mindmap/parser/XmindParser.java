@@ -12,7 +12,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.zip.ZipEntry;
-import java.util.zip.ZipException;
 import java.util.zip.ZipInputStream;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -41,21 +40,20 @@ public class XmindParser extends MindmapParser {
 
   @Override
   Sheet[] parse(InputStream xmindInputStream) {
-    List<Sheet> sheets = new ArrayList<>();
+    Sheet[] sheets = null;
 
     InputStream contentInputStream = this.extractContentFromXmind(xmindInputStream);
     if (contentInputStream != null) {
       NodeList sheetNodes = this.getSheetNodes(contentInputStream);
+      sheets = new Sheet[sheetNodes.getLength()];
       for (int i = 0; i < sheetNodes.getLength(); i++) {
         Sheet sheet = this.parseSheetNode(sheetNodes.item(i));
         if (sheet.getTopic() != null) {
-          sheets.add(sheet);
-          // } else {
-          // LOG.warn("Null topic sheet found!");
+          sheets[i] = sheet;
         }
       }
     }
-    return sheets.toArray(new Sheet[0]);
+    return sheets;
   }
 
   private InputStream extractContentFromXmind(InputStream xmindInputStream) {
@@ -75,10 +73,8 @@ public class XmindParser extends MindmapParser {
           }
         }
       }
-    } catch (ZipException ze) {
-      ze.printStackTrace();
     } catch (IOException ioe) {
-      ioe.printStackTrace();
+      return null;
     }
     return contentInputStream;
   }

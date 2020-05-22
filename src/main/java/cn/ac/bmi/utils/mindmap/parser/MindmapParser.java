@@ -7,16 +7,15 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public abstract class MindmapParser {
-  // public static Logger LOG = LogManager.getLogger(MindmapParser.class);
   public Sheet[] parse(String mindmapPath) {
     InputStream mindmapInputStream = null;
     try {
       mindmapPath = mindmapPath == null ? null : mindmapPath.trim();
       mindmapInputStream = new FileInputStream(mindmapPath);
+      return parse(mindmapInputStream);
     } catch (IOException ioe) {
-      ioe.printStackTrace();
+      return null;
     }
-    return parse(mindmapInputStream);
   }
 
   abstract Sheet[] parse(InputStream mindmapInputStream);
