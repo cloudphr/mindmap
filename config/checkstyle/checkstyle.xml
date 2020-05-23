@@ -62,6 +62,9 @@
       <property name="max" value="120"/>
       <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>
     </module>
+    <module name="IllegalImport"/>
+    <module name="RedundantImport"/>
+    <module name="UnusedImports"/>
     <!-- <module name="AvoidStarImport"/> -->
     <module name="OneTopLevelClass"/>
     <module name="NoLineWrap"/>
