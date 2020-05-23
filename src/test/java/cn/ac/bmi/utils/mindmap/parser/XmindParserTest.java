@@ -10,18 +10,15 @@ import java.io.*;
 import static org.testng.Assert.*;
 
 public class XmindParserTest {
-  private ClassLoader classLoader = getClass().getClassLoader();
+  private ClassLoader classLoader;
   private MindmapParser parser;
 
   @BeforeMethod
   public void setUp() throws Exception {
     this.parser = new XmindParser();
-  }
-
-  @Test
-  public void testParseNotExistFile() {
-    Sheet[] sheets = this.parser.parse("SOME_FILE_NOT_EXISTS");
-    assertNull(sheets);
+    this.classLoader = this.getClass().getClassLoader();
+    assertNotNull(this.parser);
+    assertNotNull(this.classLoader);
   }
 
   @Test

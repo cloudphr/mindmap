@@ -197,5 +197,4 @@ public class XmindParser extends MindmapParser {
     link = "".equals(link) ? null : link;
     return new Topic(id, title, topicArray, labels, note, link);
   }
-
 }
