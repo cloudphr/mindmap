@@ -1,10 +1,12 @@
 package cn.ac.bmi.utils.mindmap.model;
 
+import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Set;
 import java.util.function.Consumer;
 
+@Getter
 public class Topic {
   private String id;
   private String title;

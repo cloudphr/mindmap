@@ -5,8 +5,7 @@ import lombok.Getter;
 import java.util.function.Consumer;
 
 public class Mindmap {
-  @Getter
-  private Sheet[] sheets;
+  @Getter private Sheet[] sheets;
   Consumer<Sheet> sheetHook;
   Consumer<Topic> topicHook;
 
