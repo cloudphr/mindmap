@@ -45,11 +45,13 @@ public class XmindParser extends MindmapParser {
     InputStream contentInputStream = this.extractContentFromXmind(xmindInputStream);
     if (contentInputStream != null) {
       NodeList sheetNodes = this.getSheetNodes(contentInputStream);
-      sheets = new Sheet[sheetNodes.getLength()];
-      for (int i = 0; i < sheetNodes.getLength(); i++) {
-        Sheet sheet = this.parseSheetNode(sheetNodes.item(i));
-        if (sheet.getTopic() != null) {
-          sheets[i] = sheet;
+      if (sheetNodes != null) {
+        sheets = new Sheet[sheetNodes.getLength()];
+        for (int i = 0; i < sheetNodes.getLength(); i++) {
+          Sheet sheet = this.parseSheetNode(sheetNodes.item(i));
+          if (sheet.getTopic() != null) {
+            sheets[i] = sheet;
+          }
         }
       }
     }
@@ -145,7 +147,6 @@ public class XmindParser extends MindmapParser {
         if (XmindParser.TOPIC_CHILDREN.equals(attributeElement.getTagName().toLowerCase())) {
           NodeList children = attributeElement.getChildNodes();
           if (children != null) {
-            topics = new ArrayList<>();
             for (int j = 0; j < children.getLength(); j++) {
               Node childNode = children.item(j);
               if (childNode instanceof Element) {
@@ -157,6 +158,9 @@ public class XmindParser extends MindmapParser {
                     if (topicChild instanceof Element) {
                       Element topicElement = (Element) topicChild;
                       Topic child = this.parseTopicNode(topicElement);
+                      if (topics == null) {
+                        topics = new ArrayList<>();
+                      }
                       topics.add(child);
                     }
                   }
@@ -166,12 +170,14 @@ public class XmindParser extends MindmapParser {
           }
         }
         if (XmindParser.TOPIC_LABELS.equals(attributeElement.getTagName())) {
-          labels = new HashSet<>();
           Node childNode = attributeElement.getFirstChild();
           while (childNode != null) {
             if (childNode instanceof Element) {
               Element labelElement = (Element) childNode;
               Text textNode = (Text) labelElement.getFirstChild();
+              if (labels == null) {
+                labels = new HashSet<>();
+              }
               labels.add(textNode.getData().trim());
             }
             childNode = childNode.getNextSibling();

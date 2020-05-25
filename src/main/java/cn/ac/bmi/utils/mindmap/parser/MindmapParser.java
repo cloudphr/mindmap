@@ -8,10 +8,13 @@ import java.io.InputStream;
 
 public abstract class MindmapParser {
   public Sheet[] parse(String mindmapPath) {
-    InputStream mindmapInputStream = null;
+    if (mindmapPath == null) {
+      return null;
+    }
+
     try {
-      mindmapPath = mindmapPath == null ? null : mindmapPath.trim();
-      mindmapInputStream = new FileInputStream(mindmapPath);
+      mindmapPath = mindmapPath.trim();
+      InputStream mindmapInputStream = new FileInputStream(mindmapPath);
       return parse(mindmapInputStream);
     } catch (IOException ioe) {
       return null;
