@@ -3,5 +3,14 @@ language: java
 jdk:
   - openjdk8
 
+addons:
+  sonarcloud:
+    organization: "cloudphr"
+    token:
+      secure: "hyUDxfR3yWtrkI/l8Be7i7rm5cQfS8gSzH0lXUltcdg6M/6a22J1s1A4EvIiK0NFm9aikcLBaWH3z7oRRljuFMhk894UnLvFBBAV3I2hsmTAKvgV3Q29m7si5zUvIqGFLiNWMQc++EqZkYbm0u9pzVDVaRW250ggj15uQHVubZnJ/Rm4WX4z/eTvGgNETi/dSkT3MCU4pdkPq3qZc2bSPkDDx2ZlzM6EIWjjqvJ4wAEAj705taaQEstwfQuagvlY4pLhbJdDQ72HZPoHBi+ExCwPKsXjm7terVRxyOnL8XXS3D+K5W971A6sLeurgPOEgDwBaWUu8d1Vj3RrZcTSfW9sFnVKtzoP5ym1Kmfb8uUvu1DH/lFx6vIIMRHEIibAIpGYEN7obS1Phduwc0e1VS03BuSKrtZBiBKCB6Gx1leZVsUqdDILa+RPMnwCkz49dp+QNuDAPba8QUgAMTV5N0ROpyNxHQ4BvvWGaMnlAyTiG65HiokX14J5G+3UE/CfJYtCHUPWtGEXW1WQqqIdj2hO8/S72/0NDIBzMdStyCl0MEUXYb/JMQ6CrTfayuc1tdDAl793ZDTLKgHJrgN7Y/iTgDcKBAdfr0dWjX/cCoUiueOqW9A6lkEt5xZymUGZfOiO6Z73FsSpG89kvQLp4JTGLycL0cVt2DQ7U6KMbZ8="
+
+script:
+  - gradle sonarqube
+
 after_success:
   - gradle jacocoTestReport coveralls
