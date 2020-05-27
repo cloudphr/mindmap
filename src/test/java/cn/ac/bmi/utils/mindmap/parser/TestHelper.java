@@ -98,15 +98,4 @@ public class TestHelper {
     }
     return content.toString();
   }
-
-  public static void main(String[] args) {
-    Topic first = TestHelper.constructTopicFromJson("src/test/resources/simple-1.json");
-    Topic second = TestHelper.constructTopicFromJson("src/test/resources/simple-1.json");
-    first.setTopics(null);
-    if (TestHelper.topicsEquals(first, second)) {
-      System.out.println("Equals");
-    } else {
-      System.out.println("Not equals");
-    }
-  }
 }
