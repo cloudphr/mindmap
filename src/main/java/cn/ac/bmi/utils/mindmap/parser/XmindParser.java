@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -66,6 +67,9 @@ public class XmindParser extends MindmapParser {
     InputStream contentInputStream = null;
     try {
       ZipInputStream zipInputStream = new ZipInputStream(xmindInputStream);
+      if (zipInputStream == null) {
+        return null;
+      }
       ZipEntry entry;
       while ((entry = zipInputStream.getNextEntry()) != null) {
         if (!entry.isDirectory() && entry.getName() != null) {
@@ -84,6 +88,8 @@ public class XmindParser extends MindmapParser {
   private NodeList getSheetNodes(InputStream is) {
     try {
       DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+      factory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+      factory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
       DocumentBuilder builder = factory.newDocumentBuilder();
       Document doc = builder.parse(is);
       Element root = doc.getDocumentElement();
