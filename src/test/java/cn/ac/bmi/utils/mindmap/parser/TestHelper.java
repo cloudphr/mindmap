@@ -14,25 +14,32 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TestHelper {
-  public static boolean topicsEquals(Topic first, Topic second) {
-    if (first.equals(second)) {
-      return true;
-    }
-    if ((first == null || second == null) || (first.getClass() != second.getClass())) {
-      return false;
-    }
-    if (!StringUtils.equals(first.getId(), second.getId())
-            || !StringUtils.equals(first.getTitle(), second.getTitle())
-            || !StringUtils.equals(first.getNote(), second.getNote())
-            || !StringUtils.equals(first.getLink(), second.getLink())
-    ) {
-      return false;
-    }
+  protected static boolean topicsEquals(Topic first, Topic second) {
+    return TestHelper.isSameObject(first, second)
+            || (!TestHelper.singleNull(first, second)
+            && StringUtils.equals(first.getId(), second.getId())
+            && StringUtils.equals(first.getTitle(), second.getTitle())
+            && StringUtils.equals(first.getNote(), second.getNote())
+            && StringUtils.equals(first.getLink(), second.getLink())
+            && TestHelper.isLabelsEqual(first, second)
+            && TestHelper.isSubtopicsEqual(first, second));
+  }
 
-    /* test if child topics of the two topics are equal recursively */
+  private static boolean isSameObject(Topic first, Topic second) {
+    return (first == null && second == null) || (first != null && first.equals(second));
+  }
+
+  private static boolean isLabelsEqual(Topic first, Topic second) {
+    return !TestHelper.singleNull(first.getLabels(), second.getLabels())
+            && !(first.getLabels() != null && second.getLabels() != null
+            && !first.getLabels().equals(second.getLabels()));
+  }
+
+  private static boolean isSubtopicsEqual(Topic first, Topic second) {
     if (TestHelper.singleNull(first.getTopics(), second.getTopics())) {
       return false;
     }
+
     if (first.getTopics() != null && second.getTopics() != null) {
       List<Topic> firstChildTopics = new ArrayList<>(Arrays.asList(first.getTopics()));
       List<Topic> secondChildTopics = new ArrayList<>(Arrays.asList(second.getTopics()));
@@ -46,17 +53,6 @@ public class TestHelper {
         }
       }
     }
-
-    /* test if labels of the two topics are equal, NOTICE: labels may be null, but not be empty set*/
-    if (TestHelper.singleNull(first.getLabels(), second.getLabels())) {
-      return false;
-    }
-    /* test if the two sets(String) are equal */
-    if (first.getLabels() != null && second.getLabels() != null
-            && !first.getLabels().equals(second.getLabels())) {
-      return false;
-    }
-
     return true;
   }
 
@@ -64,19 +60,12 @@ public class TestHelper {
     return (first == null && second != null) || (first != null && second == null);
   }
 
-  public static Topic constructTopicFromJson(String jsonFilePath) {
-    String content = TestHelper.getFileContent(jsonFilePath);
-    Gson gson = new Gson();
-    Topic fromJson = gson.fromJson(content, Topic.class);
-    return fromJson;
-  }
-
-  private static String getFileContent(String fileName) {
+  protected static Topic constructTopicFromJson(String fileName) {
     StringBuffer content = new StringBuffer();
     BufferedReader reader = null;
     try {
       reader = new BufferedReader(new FileReader(new File(fileName)));
-      String line = null;
+      String line;
       while ((line = reader.readLine()) != null) {
         content.append(line);
       }
@@ -91,6 +80,6 @@ public class TestHelper {
         e.printStackTrace();
       }
     }
-    return content.toString();
+    return new Gson().fromJson(content.toString(), Topic.class);
   }
 }
