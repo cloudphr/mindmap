@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -68,11 +69,10 @@ public class XmindParser extends MindmapParser {
       ZipInputStream zipInputStream = new ZipInputStream(xmindInputStream);
       ZipEntry entry;
       while ((entry = zipInputStream.getNextEntry()) != null) {
-        if (!entry.isDirectory() && entry.getName() != null) {
-          if (XmindParser.CONTENT_FILE_NAME.equals(entry.getName().trim().toLowerCase())) {
-            contentInputStream = zipInputStream;
-            break;
-          }
+        if (!entry.isDirectory() && entry.getName() != null
+            && XmindParser.CONTENT_FILE_NAME.equalsIgnoreCase(entry.getName().trim())) {
+          contentInputStream = zipInputStream;
+          break;
         }
       }
     } catch (IOException ioe) {
@@ -84,16 +84,14 @@ public class XmindParser extends MindmapParser {
   private NodeList getSheetNodes(InputStream is) {
     try {
       DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+      factory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+      factory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
       DocumentBuilder builder = factory.newDocumentBuilder();
       Document doc = builder.parse(is);
       Element root = doc.getDocumentElement();
 
       return root.getChildNodes();
-    } catch (ParserConfigurationException e) {
-      e.printStackTrace();
-    } catch (SAXException e) {
-      e.printStackTrace();
-    } catch (IOException e) {
+    } catch (IOException | SAXException | ParserConfigurationException e) {
       e.printStackTrace();
     }
 
@@ -140,11 +138,11 @@ public class XmindParser extends MindmapParser {
       Node attributeNode = topicAttributes.item(i);
       if (attributeNode instanceof Element) {
         Element attributeElement = (Element) attributeNode;
-        if (XmindParser.TOPIC_TITLE.equals(attributeElement.getTagName().toLowerCase())) {
+        if (XmindParser.TOPIC_TITLE.equalsIgnoreCase(attributeElement.getTagName())) {
           Text textNode = (Text) attributeElement.getFirstChild();
           title = (textNode != null) ? textNode.getData().trim() : "";
         }
-        if (XmindParser.TOPIC_CHILDREN.equals(attributeElement.getTagName().toLowerCase())) {
+        if (XmindParser.TOPIC_CHILDREN.equalsIgnoreCase(attributeElement.getTagName())) {
           NodeList children = attributeElement.getChildNodes();
           if (children != null) {
             for (int j = 0; j < children.getLength(); j++) {
