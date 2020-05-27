@@ -67,16 +67,12 @@ public class XmindParser extends MindmapParser {
     InputStream contentInputStream = null;
     try {
       ZipInputStream zipInputStream = new ZipInputStream(xmindInputStream);
-      if (zipInputStream == null) {
-        return null;
-      }
       ZipEntry entry;
       while ((entry = zipInputStream.getNextEntry()) != null) {
-        if (!entry.isDirectory() && entry.getName() != null) {
-          if (XmindParser.CONTENT_FILE_NAME.equals(entry.getName().trim().toLowerCase())) {
-            contentInputStream = zipInputStream;
-            break;
-          }
+        if (!entry.isDirectory() && entry.getName() != null
+            && XmindParser.CONTENT_FILE_NAME.equalsIgnoreCase(entry.getName().trim())) {
+          contentInputStream = zipInputStream;
+          break;
         }
       }
     } catch (IOException ioe) {
@@ -95,11 +91,7 @@ public class XmindParser extends MindmapParser {
       Element root = doc.getDocumentElement();
 
       return root.getChildNodes();
-    } catch (ParserConfigurationException e) {
-      e.printStackTrace();
-    } catch (SAXException e) {
-      e.printStackTrace();
-    } catch (IOException e) {
+    } catch (IOException | SAXException | ParserConfigurationException e) {
       e.printStackTrace();
     }
 
@@ -146,11 +138,11 @@ public class XmindParser extends MindmapParser {
       Node attributeNode = topicAttributes.item(i);
       if (attributeNode instanceof Element) {
         Element attributeElement = (Element) attributeNode;
-        if (XmindParser.TOPIC_TITLE.equals(attributeElement.getTagName().toLowerCase())) {
+        if (XmindParser.TOPIC_TITLE.equalsIgnoreCase(attributeElement.getTagName())) {
           Text textNode = (Text) attributeElement.getFirstChild();
           title = (textNode != null) ? textNode.getData().trim() : "";
         }
-        if (XmindParser.TOPIC_CHILDREN.equals(attributeElement.getTagName().toLowerCase())) {
+        if (XmindParser.TOPIC_CHILDREN.equalsIgnoreCase(attributeElement.getTagName())) {
           NodeList children = attributeElement.getChildNodes();
           if (children != null) {
             for (int j = 0; j < children.getLength(); j++) {
