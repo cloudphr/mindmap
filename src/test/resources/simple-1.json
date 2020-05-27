@@ -1,0 +1,85 @@
+{
+    "id": "1agh8udh61im9kqqd2l12fa11k",
+    "title": "门急诊信息/Outpatient",
+    "topics": [
+        {
+            "id": "63b6e0n2sf2292n137oaip20l2",
+            "title": "数组含数组/Array of Array: aoas",
+            "topics": null,
+            "labels": [
+                "+_)(*&^%$#@!~?><:\".",
+                "CLUSTER.ArrayOfArrays",
+                "repeat"
+            ],
+            "note": null,
+            "link": null
+        },
+        {
+            "id": "3bqtbtvbauq3gmcgev1bkke19t",
+            "title": "属性/Property: prop",
+            "topics": null,
+            "labels": [
+                "TEXT，全角逗号",
+                "第2个label"
+            ],
+            "note": null,
+            "link": null
+        },
+        {
+            "id": "5t3en1rp0sb40vb3hpk8e6uudc",
+            "title": "编码文本/Encoded Text: dict",
+            "topics": null,
+            "labels": [
+                "DV_TEXT"
+            ],
+            "note": null,
+            "link": null
+        },
+        {
+            "id": "7p454iln6d0jubl0743ncksjds",
+            "title": "术语表/Terminology: diagnosis",
+            "topics": null,
+            "labels": [
+                "DV_TEXT"
+            ],
+            "note": null,
+            "link": null
+        },
+        {
+            "id": "3ligffbdjhlgoqajsdgmb6ls3n",
+            "title": "内部结构体/Inside Structure: object",
+            "topics": null,
+            "labels": [
+                "repeat",
+                "cn.ac.bmi::openEHR-EHR-CLUSTER.person.v0"
+            ],
+            "note": null,
+            "link": null
+        },
+        {
+            "id": "5irdcahq8862j5qm6iat61jh8l",
+            "title": "内部结构体1/Inside Structure1: default",
+            "topics": null,
+            "labels": [
+                "NOLABLE: default inside cluster"
+            ],
+            "note": null,
+            "link": null
+        },
+        {
+            "id": "5e9fv4c687t08vcrsp03to120g",
+            "title": "引用结构体/Outside Structure: ref",
+            "topics": null,
+            "labels": [
+                "CLUSTER.OutsideStructure"
+            ],
+            "note": null,
+            "link": "xmind:#3ligffbdjhlgoqajsdgmb6ls3n"
+        }
+    ],
+    "labels": [
+        "Hello"
+    ],
+    "note": "Notes\napi:",
+    "link": null
+}
