@@ -15,7 +15,7 @@ import java.util.List;
 
 public class TestHelper {
   public static boolean topicsEquals(Topic first, Topic second) {
-    if (first == second) {
+    if (first.equals(second)) {
       return true;
     }
     if ((first == null || second == null) || (first.getClass() != second.getClass())) {
@@ -51,22 +51,17 @@ public class TestHelper {
     if (TestHelper.singleNull(first.getLabels(), second.getLabels())) {
       return false;
     }
-    if (first.getLabels() != null && second.getLabels() != null) {
-      /* test if the two sets(String) are equal */
-      if (!first.getLabels().equals(second.getLabels())) {
-        return false;
-      }
+    /* test if the two sets(String) are equal */
+    if (first.getLabels() != null && second.getLabels() != null
+            && !first.getLabels().equals(second.getLabels())) {
+      return false;
     }
 
     return true;
   }
 
   private static boolean singleNull(Object first, Object second) {
-    if ((first == null && second != null) || (first != null && second == null)) {
-      return true;
-    } else {
-      return false;
-    }
+    return (first == null && second != null) || (first != null && second == null);
   }
 
   public static Topic constructTopicFromJson(String jsonFilePath) {
