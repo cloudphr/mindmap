@@ -1,10 +1,9 @@
 package cn.ac.bmi.utils.mindmap.model;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.Set;
 import java.util.function.Consumer;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 public class Topic {
@@ -17,7 +16,10 @@ public class Topic {
 
   private Sheet belongTo;
 
-  public Topic(String id, String title, Topic[] topics, Set<String> labels, String note, String link) {
+  public Topic(String id, String title,
+               Topic[] topics,
+               Set<String> labels,
+               String note, String link) {
     this.id = id;
     this.title = title;
     this.topics = topics;
@@ -35,7 +37,7 @@ public class Topic {
 
     this.title = this.title == null ? "" : this.title.trim();
     if (topics != null) {
-      for (Topic child: topics) {
+      for (Topic child : topics) {
         child.init(belongTo, hook);
       }
     }

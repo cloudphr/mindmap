@@ -1,8 +1,7 @@
 package cn.ac.bmi.utils.mindmap.model;
 
-import lombok.Getter;
-
 import java.util.function.Consumer;
+import lombok.Getter;
 
 public class Mindmap {
   @Getter private Sheet[] sheets;

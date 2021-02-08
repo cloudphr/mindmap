@@ -1,12 +1,12 @@
 package cn.ac.bmi.utils.mindmap.parser;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+
 import cn.ac.bmi.utils.mindmap.model.Sheet;
+import java.io.InputStream;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import java.io.InputStream;
-
-import static org.testng.Assert.*;
 
 public class MindmasterParserTest {
   private ClassLoader classLoader;
@@ -24,6 +24,7 @@ public class MindmasterParserTest {
   public void testParse() {
     InputStream inputStream = null;
     Sheet[] sheets = this.parser.parse(inputStream);
-    assertNull(sheets);
+    assertNotNull(sheets);
+    assertEquals(sheets.length, 0);
   }
 }

@@ -1,10 +1,7 @@
 package cn.ac.bmi.utils.mindmap.parser;
 
-import com.google.gson.Gson;
-
 import cn.ac.bmi.utils.mindmap.model.Topic;
-import org.apache.commons.lang3.StringUtils;
-
+import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -12,6 +9,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.apache.commons.lang3.StringUtils;
+
 
 public class TestHelper {
   protected static boolean topicsEquals(Topic first, Topic second) {

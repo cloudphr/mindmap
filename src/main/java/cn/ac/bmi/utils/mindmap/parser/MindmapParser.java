@@ -1,15 +1,14 @@
 package cn.ac.bmi.utils.mindmap.parser;
 
 import cn.ac.bmi.utils.mindmap.model.Sheet;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public abstract class MindmapParser {
-  public Sheet[] parse(String mindmapPath) {
+public interface MindmapParser {
+  default Sheet[] parse(String mindmapPath) {
     if (mindmapPath == null) {
-      return null;
+      return new Sheet[0];
     }
 
     try {
@@ -17,9 +16,9 @@ public abstract class MindmapParser {
       InputStream mindmapInputStream = new FileInputStream(mindmapPath);
       return parse(mindmapInputStream);
     } catch (IOException ioe) {
-      return null;
+      return new Sheet[0];
     }
   }
 
-  abstract Sheet[] parse(InputStream mindmapInputStream);
+  Sheet[] parse(InputStream mindmapInputStream);
 }

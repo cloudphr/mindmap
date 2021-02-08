@@ -22,19 +22,20 @@ dependencies {
 }
 
 checkstyle {
-  toolVersion = '6.19'
-  configDir = rootProject.file("config/checkstyle")
+  toolVersion = '8.39'
+  configFile = project(':').file('config/checkstyle/checkstyle.xml')
+  configProperties = [ "suppressionFile" : project(':').file('config/checkstyle/suppressions.xml')]
 }
 
 compileJava {
-  sourceCompatibility = 1.8  // can be switched to 11 for testing
-  targetCompatibility = 1.8
+  sourceCompatibility = 11  // can be switched to 11 for testing
+  targetCompatibility = 11
   options.encoding = "UTF-8"
 }
 
 compileTestJava {
-  sourceCompatibility = 1.8  // can be switched to 11 for testing
-  targetCompatibility = 1.8
+  sourceCompatibility = 11  // can be switched to 11 for testing
+  targetCompatibility = 11
   options.encoding = "UTF-8"
   options.compilerArgs += "-parameters"
 }
