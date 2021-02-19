@@ -3,6 +3,7 @@ plugins {
   id 'checkstyle'
   id 'jacoco'
   id "org.sonarqube" version "3.0"
+  id 'maven-publish'
 }
 
 group = 'cn.ac.bmi'
@@ -80,4 +81,23 @@ sonarqube {
 
 tasks['jacocoTestReport'].dependsOn test
 tasks['sonarqube'].dependsOn jacocoTestReport
+
+publishing {
+  repositories {
+    maven {
+      name = "GitHubPackages"
+      url = "https://maven.pkg.github.com/cloudphr/mindmap"
+      credentials {
+        username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
+        password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
+      }
+    }
+  }
+
+  publications {
+      gpr(MavenPublication) {
+          from(components.java)
+      }
+  }
+}
 

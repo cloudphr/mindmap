@@ -1,3 +1,15 @@
+gradle.properties
+
+.vscode
+
+tmp
+.classpath
+.project
+.settings/
+bin/
+docs/.project
+docs/.settings/
+
 *.class
 *.swp
 
