@@ -15,9 +15,8 @@ hs_err_pid*
 # Gradle Files
 .gradle
 build/
-gradle/
-gradlew
-gradlew.bat
+!gradle/wrapper/gradle-wrapper.jar
+
 
 # Idea Files
 *.iml
