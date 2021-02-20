@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'cn.ac.bmi'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.2-SNAPSHOT'
 
 configurations {
   compileOnly {
