@@ -1,6 +1,6 @@
-package cn.ac.bmi.utils.mindmap.parser;
+package cn.ac.bmi.mindmap.parser;
 
-import cn.ac.bmi.utils.mindmap.model.Topic;
+import cn.ac.bmi.mindmap.model.Topic;
 import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.File;

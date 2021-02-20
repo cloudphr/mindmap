@@ -1,4 +1,4 @@
-package cn.ac.bmi.utils.mindmap.model;
+package cn.ac.bmi.mindmap.model;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;

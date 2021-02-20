@@ -1,9 +1,9 @@
-package cn.ac.bmi.utils.mindmap.parser;
+package cn.ac.bmi.mindmap.parser;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
-import cn.ac.bmi.utils.mindmap.model.Sheet;
+import cn.ac.bmi.mindmap.model.Sheet;
 import java.io.InputStream;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

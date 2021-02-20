@@ -1,7 +1,7 @@
-package cn.ac.bmi.utils.mindmap.parser;
+package cn.ac.bmi.mindmap.parser;
 
-import cn.ac.bmi.utils.mindmap.model.Sheet;
-import cn.ac.bmi.utils.mindmap.model.Topic;
+import cn.ac.bmi.mindmap.model.Sheet;
+import cn.ac.bmi.mindmap.model.Topic;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;

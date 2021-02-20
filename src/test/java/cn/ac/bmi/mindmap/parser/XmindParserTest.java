@@ -1,11 +1,11 @@
-package cn.ac.bmi.utils.mindmap.parser;
+package cn.ac.bmi.mindmap.parser;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
 
-import cn.ac.bmi.utils.mindmap.model.Sheet;
-import cn.ac.bmi.utils.mindmap.model.Topic;
+import cn.ac.bmi.mindmap.model.Sheet;
+import cn.ac.bmi.mindmap.model.Topic;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
