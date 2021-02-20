@@ -43,22 +43,22 @@ public class XmindParser implements MindmapParser {
   private static final String TOPIC_NOTE_PLAIN = "plain";
 
   public Sheet[] parse(InputStream xmindInputStream) {
-    Sheet[] sheets = null;
+    List<Sheet> sheets = new ArrayList<>();
 
     InputStream contentInputStream = this.extractContentFromXmind(xmindInputStream);
     if (contentInputStream != null) {
       NodeList sheetNodes = this.getSheetNodes(contentInputStream);
       if (sheetNodes != null) {
-        sheets = new Sheet[sheetNodes.getLength()];
         for (int i = 0; i < sheetNodes.getLength(); i++) {
           Sheet sheet = this.parseSheetNode(sheetNodes.item(i));
           if (sheet.getTopic() != null) {
-            sheets[i] = sheet;
+            sheets.add(sheet);
           }
         }
       }
     }
-    return sheets;
+
+    return sheets.size() > 0 ? sheets.toArray(new Sheet[0]) : null;
   }
 
   private InputStream extractContentFromXmind(InputStream xmindInputStream) {

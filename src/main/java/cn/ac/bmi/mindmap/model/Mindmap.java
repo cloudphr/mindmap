@@ -20,6 +20,9 @@ public class Mindmap {
   private void init() {
     if (this.sheets != null) {
       for (Sheet sheet : this.sheets) {
+        if (sheet == null) {
+          continue;
+        }
         sheet.init();
         sheet.setBelongTo(this);
         this.topics.putAll(sheet.getTopics());
