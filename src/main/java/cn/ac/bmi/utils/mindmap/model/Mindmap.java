@@ -1,24 +1,28 @@
 package cn.ac.bmi.utils.mindmap.model;
 
-import java.util.function.Consumer;
+import java.util.HashMap;
+import java.util.Map;
 import lombok.Getter;
 
 public class Mindmap {
   @Getter private Sheet[] sheets;
-  Consumer<Sheet> sheetHook;
-  Consumer<Topic> topicHook;
+  private Map<String, Topic> topics = new HashMap<>();
 
-  public Mindmap(Sheet[] sheets, Consumer<Sheet> sheetHook, Consumer<Topic> topicHook) {
+  public Mindmap(Sheet[] sheets) {
     this.sheets = sheets;
-    this.sheetHook = sheetHook;
-    this.topicHook = topicHook;
     this.init();
+  }
+
+  public Topic getTopic(String id) {
+    return topics.get(id);
   }
 
   private void init() {
     if (this.sheets != null) {
       for (Sheet sheet : this.sheets) {
-        sheet.init(sheetHook, topicHook);
+        sheet.init();
+        sheet.setBelongTo(this);
+        this.topics.putAll(sheet.getTopics());
       }
     }
   }

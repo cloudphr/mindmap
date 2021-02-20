@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 public class MindmapTest {
   @Test
   public void testObjectCreation() {
-    Mindmap mindmap = new Mindmap(new Sheet[0], null, null);
+    Mindmap mindmap = new Mindmap(new Sheet[0]);
     assertNotNull(mindmap);
     Sheet[] sheets = mindmap.getSheets();
     assertNotNull(sheets);

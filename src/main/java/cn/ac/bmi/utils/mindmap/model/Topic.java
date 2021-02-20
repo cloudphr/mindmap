@@ -1,7 +1,7 @@
 package cn.ac.bmi.utils.mindmap.model;
 
+import java.util.HashSet;
 import java.util.Set;
-import java.util.function.Consumer;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,10 +16,7 @@ public class Topic {
 
   private Sheet belongTo;
 
-  public Topic(String id, String title,
-               Topic[] topics,
-               Set<String> labels,
-               String note, String link) {
+  public Topic(String id, String title, Topic[] topics, Set<String> labels, String note, String link) {
     this.id = id;
     this.title = title;
     this.topics = topics;
@@ -28,25 +25,42 @@ public class Topic {
     this.link = link;
   }
 
-  public Topic init(Sheet belongTo, Consumer<Topic> hook) {
+  public Topic(String title, Sheet belongTo) {
+    this.title = title;
     this.belongTo = belongTo;
+  }
 
-    if (hook != null) {
-      hook.accept(this);
-    }
+  public Topic(String title, String type, Sheet belongTo) {
+    this(title, belongTo);
+    this.labels = new HashSet<>();
+    this.labels.add(type);
+  }
 
+  public Topic init(Sheet belongTo) {
+    this.belongTo = belongTo;
     this.title = this.title == null ? "" : this.title.trim();
+
+    Set<String> newLabels = new HashSet<>();
+    if (labels != null) {
+      for (String label : labels) {
+        label = label.trim();
+        newLabels.add(label);
+      }
+    }
+    this.labels = newLabels;
+
     if (topics != null) {
       for (Topic child : topics) {
-        child.init(belongTo, hook);
+        child.init(belongTo);
+        this.belongTo.getTopics().put(child.id, child);
       }
     }
 
     return this;
   }
 
-  public Topic(String title, Sheet belongTo) {
-    this.title = title;
-    this.belongTo = belongTo;
+  @Override
+  public String toString() {
+    return "Topic[" + this.title + "@" + this.belongTo.getTitle() + "]";
   }
 }
