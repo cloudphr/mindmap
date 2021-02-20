@@ -13,7 +13,6 @@ public class Topic {
   private Set<String> labels;
   private String note;
   private String link;
-
   @Setter private Sheet belongTo;
 
   public Topic(String id, String title, Topic[] topics, Set<String> labels, String note, String link) {
@@ -61,6 +60,10 @@ public class Topic {
 
   @Override
   public String toString() {
-    return "Topic[" + this.title + "@" + this.belongTo.getTitle() + "]";
+    if (this.belongTo == null) {
+      return "Topic[" + this.title + "@null]";
+    } else {
+      return "Topic[" + this.title + "@" + this.belongTo.getTitle() + "]";
+    }
   }
 }
