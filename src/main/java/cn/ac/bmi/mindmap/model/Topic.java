@@ -14,7 +14,7 @@ public class Topic {
   private String note;
   private String link;
 
-  private Sheet belongTo;
+  @Setter private Sheet belongTo;
 
   public Topic(String id, String title, Topic[] topics, Set<String> labels, String note, String link) {
     this.id = id;

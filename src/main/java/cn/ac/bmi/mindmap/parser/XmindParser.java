@@ -58,7 +58,7 @@ public class XmindParser implements MindmapParser {
       }
     }
 
-    return sheets.size() > 0 ? sheets.toArray(new Sheet[0]) : null;
+    return sheets.isEmpty() ? null : sheets.toArray(new Sheet[0]);
   }
 
   private InputStream extractContentFromXmind(InputStream xmindInputStream) {

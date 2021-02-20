@@ -115,4 +115,13 @@ public class XmindParserTest {
     Topic secondTopic = TestHelper.constructTopicFromJson(jsonFile.getAbsolutePath());
     assertEquals(TestHelper.topicsEquals(firstTopic, secondTopic), true);
   }
+
+  @Test
+  public void parserShouldNotReturnNullSheet() {
+    File file = new File(this.classLoader.getResource("simple-1.xmind").getFile());
+    Sheet[] sheets = this.parser.parse(file.getAbsolutePath());
+    for (Sheet sheet : sheets) {
+      assertNotNull(sheet);
+    }
+  }
 }

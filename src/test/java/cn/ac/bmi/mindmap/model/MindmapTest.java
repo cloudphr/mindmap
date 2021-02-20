@@ -14,4 +14,23 @@ public class MindmapTest {
     assertNotNull(sheets);
     assertEquals(sheets.length, 0);
   }
+
+  @Test
+  public void nullSheetInSheetsShouldNotFailMindmapCreation() {
+    Sheet[] sheets = new Sheet[2];
+    sheets[0] = null;
+    sheets[1] = null;
+    Mindmap mindmap = new Mindmap(sheets);
+    assertNotNull(mindmap);
+  }
+
+  @Test
+  public void temp() {
+    Topic topic = new Topic("", null);
+    Sheet sheet = new Sheet("NO", topic, "");
+    topic.setBelongTo(sheet);
+    Sheet[] sheets = {sheet};
+    Mindmap mindmap = new Mindmap(sheets);
+    assertNotNull(mindmap);
+  }
 }
