@@ -6,8 +6,8 @@ plugins {
   id 'maven-publish'
 }
 
-group = 'cn.ac.bmi'
-version = '0.0.2-SNAPSHOT'
+group = 'cn.ac.bmi.cloudphr'
+version = '0.0.3-SNAPSHOT'
 
 configurations {
   compileOnly {
